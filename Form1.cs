@@ -1,3 +1,7 @@
+using System.Drawing;
+using System.Windows.Forms;
+
+
 namespace ATM;
 
 public partial class Form1 : Form
@@ -11,7 +15,8 @@ public partial class Form1 : Form
         flowLayoutPanel1 = new FlowLayoutPanel();
         flowLayoutPanel1.FlowDirection = FlowDirection.TopDown;
         flowLayoutPanel1.Dock = DockStyle.Fill;
-
+        
+        Console.WriteLine("hello");
         //create a display
         displayLabel = new Label();
         displayLabel.Font = new Font("Arial", 24, FontStyle.Bold);
@@ -20,7 +25,7 @@ public partial class Form1 : Form
         displayLabel.TextAlign = ContentAlignment.MiddleCenter;
         displayLabel.Margin = new Padding(5, 10, 5, 5);
         flowLayoutPanel1.Controls.Add(displayLabel);
-
+        Console.WriteLine("hello2");
         //KeyPad number sorting 
         string[] keyPad = {"1", "2", "3","Clear", "4", "5", "6", "cancel", "7", "8", "9", "ok", " ", "0", " "};
         for (int row = 0; row < 4; row++)
