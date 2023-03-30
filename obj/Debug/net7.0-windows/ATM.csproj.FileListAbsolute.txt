@@ -1,0 +1,15 @@
+C:\Users\tommy\OneDrive\Bureau\#\ATM\bin\Debug\net7.0-windows\ATM.exe
+C:\Users\tommy\OneDrive\Bureau\#\ATM\bin\Debug\net7.0-windows\ATM.deps.json
+C:\Users\tommy\OneDrive\Bureau\#\ATM\bin\Debug\net7.0-windows\ATM.runtimeconfig.json
+C:\Users\tommy\OneDrive\Bureau\#\ATM\bin\Debug\net7.0-windows\ATM.dll
+C:\Users\tommy\OneDrive\Bureau\#\ATM\bin\Debug\net7.0-windows\ATM.pdb
+C:\Users\tommy\OneDrive\Bureau\#\ATM\obj\Debug\net7.0-windows\ATM.csproj.AssemblyReference.cache
+C:\Users\tommy\OneDrive\Bureau\#\ATM\obj\Debug\net7.0-windows\ATM.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\tommy\OneDrive\Bureau\#\ATM\obj\Debug\net7.0-windows\ATM.AssemblyInfoInputs.cache
+C:\Users\tommy\OneDrive\Bureau\#\ATM\obj\Debug\net7.0-windows\ATM.AssemblyInfo.cs
+C:\Users\tommy\OneDrive\Bureau\#\ATM\obj\Debug\net7.0-windows\ATM.csproj.CoreCompileInputs.cache
+C:\Users\tommy\OneDrive\Bureau\#\ATM\obj\Debug\net7.0-windows\ATM.dll
+C:\Users\tommy\OneDrive\Bureau\#\ATM\obj\Debug\net7.0-windows\refint\ATM.dll
+C:\Users\tommy\OneDrive\Bureau\#\ATM\obj\Debug\net7.0-windows\ATM.pdb
+C:\Users\tommy\OneDrive\Bureau\#\ATM\obj\Debug\net7.0-windows\ATM.genruntimeconfig.cache
+C:\Users\tommy\OneDrive\Bureau\#\ATM\obj\Debug\net7.0-windows\ref\ATM.dll
