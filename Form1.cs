@@ -15,8 +15,7 @@ public partial class Form1 : Form
         flowLayoutPanel1 = new FlowLayoutPanel();
         flowLayoutPanel1.FlowDirection = FlowDirection.TopDown;
         flowLayoutPanel1.Dock = DockStyle.Fill;
-        
-        Console.WriteLine("hello");
+        this.Controls.Add(flowLayoutPanel1);
         //create a display
         displayLabel = new Label();
         displayLabel.Font = new Font("Arial", 24, FontStyle.Bold);
@@ -25,8 +24,28 @@ public partial class Form1 : Form
         displayLabel.TextAlign = ContentAlignment.MiddleCenter;
         displayLabel.Margin = new Padding(5, 10, 5, 5);
         flowLayoutPanel1.Controls.Add(displayLabel);
-        Console.WriteLine("hello2");
-        //KeyPad number sorting 
+        
+        
+        //creating table row and columns 
+        TableLayoutPanel tableLayout = new TableLayoutPanel();
+        tableLayout.Height = 300;
+        tableLayout.Width = 300;
+        tableLayout.AutoSize = false;
+        tableLayout.ColumnCount = 4;
+        tableLayout.RowCount = 4;
+        tableLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
+        tableLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
+        tableLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
+        tableLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
+        tableLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
+        tableLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
+        tableLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
+        tableLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
+        tableLayout.Dock = DockStyle.Fill;
+        flowLayoutPanel1.Controls.Add(tableLayout);
+
+
+        //KeyPad number sorting
         string[] keyPad = {"1", "2", "3","Clear", "4", "5", "6", "cancel", "7", "8", "9", "ok", " ", "0", " "};
         for (int row = 0; row < 4; row++)
         {
@@ -37,12 +56,19 @@ public partial class Form1 : Form
                 buttonKey.Text = keyPad[index];
                 buttonKey.Width = 50;
                 buttonKey.Height = 50;
+                buttonKey.AutoSize = false;
+                buttonKey.Margin = new Padding(0);
+                buttonKey.Padding = new Padding(0);
+                buttonKey.Click += ButtonClick;
                 flowLayoutPanel1.Controls.Add(buttonKey);
             }
                 
         }
     
-         this.Controls.Add(flowLayoutPanel1);
+        private void ButtonClick(object? sender, EventArgs e)
+        {
+            Button button = (Button)sender;
+        }
     }
     
 
