@@ -6,6 +6,7 @@ namespace ATM
     public partial class Form1 : Form
     {
         private string currentNumber;
+        private string previousNumber;
         private FlowLayoutPanel flowLayoutPanel1;
         private Label displayLabel;
 
@@ -47,7 +48,7 @@ namespace ATM
             flowLayoutPanel1.Controls.Add(tableLayout);
 
             //KeyPad number sorting
-            string[] keyPad = { "1", "2", "3", "Clear", "4", "5", "6", "cancel", "7", "8", "9", "ok", " ", "0", " " };
+            string[] keyPad = { "1", "2", "3", "Clear", "4", "5", "6", "Cancel", "7", "8", "9", "Ok", " ", "0", " " };
             for (int row = 0; row < 4; row++)
             {
                 for (int col = 0; col < 4; col++)
@@ -85,6 +86,24 @@ namespace ATM
                 case "0":
                     HandleDigit(buttonText);
                     break;
+                case "Clear":
+                    HandleClear(buttonText);
+                    break;
+                case "Cancel":
+                    HandleCancel(buttonText);
+                    break;
+                case "Ok":
+                    HandleOk(buttonText);
+                    break;
+                case "Select":
+                    HandleOk(buttonText);
+                    break;
+                case "Get cash":
+                    HandleGetCash(buttonText);
+                    break;
+                
+            
+                
             }
         }
 
@@ -94,9 +113,27 @@ namespace ATM
             UpdateDisplay();
         }
 
-        private void UpdateDisplay()
+        private void HandleClear(string ButtonText)
         {
-            displayLabel.Text = currentNumber;
+            currentNumber = "";
+            previousNumber = "";
+            UpdateDisplay();
         }
+
+        private void HandleCancel(string ButtonText)
+        {
+            MainDisplay();
+        }
+
+        private void HandleOk(string ButtonText)
+        {
+            ConfirmNumber();
+        }
+
+        private void HandleGetCash(string Buttontext)
+        {
+            GetCash();
+        }
+
     }
 }
