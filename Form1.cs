@@ -6,7 +6,7 @@ namespace ATM
     public class MainForm : Form
     {
         private Label displayLabel;
-        private string currentAmount ="0";
+        private string currentAmount = "\0";
         private Button getcashButton;
         private Panel keypadPanel;
         private TableLayoutPanel cashAmountPanel;
@@ -18,7 +18,7 @@ namespace ATM
             Width = 400;
             Height = 300;
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "ATM"
+            Text = "ATM";
 
             //Create the Get Cash button
             getcashButton = new Button();
@@ -73,6 +73,7 @@ namespace ATM
                 keypadButton.Height = 50;
                 keypadButton.Click += KeypadButtonClick;
                 keypadPanel.Controls.Add(keypadButton);
+                
             }
         }
         private void GetCashButtonClick(object sender, EventArgs e)
@@ -92,6 +93,7 @@ namespace ATM
                 cashAmountButton.Width = 100;
                 cashAmountButton.Height = 100;
                 cashAmountButton.Click += CashAmountButtonClick;
+                cashAmountPanel.Controls.Add(cashAmountButton);
             }
         }
         private void CashAmountButtonClick(object? sender, EventArgs e)
@@ -115,6 +117,39 @@ namespace ATM
                     break;
             }
         }
+
+        private void Handle20()
+        {   
+            int amount = 20;
+            int result = int.Parse(currentAmount) + amount;
+            currentAmount = result.ToString();
+            UpdateDisplay();
+        }
+
+        private void Handle50()
+        {
+            int amount = 50;
+            int result = int.Parse(currentAmount) + amount;
+            currentAmount = result.ToString();
+            UpdateDisplay();
+        }
+
+        private void Handle100()
+        {
+            int amount = 100;
+            int result = int.Parse(currentAmount) + amount;
+            currentAmount = result.ToString();
+            UpdateDisplay();
+        }
+
+        private void HandleCustom()
+        {
+            keypadPanel.Visible = true;
+            currentAmount = 
+        }
+    
+
     }
+
 
 }
