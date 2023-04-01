@@ -76,6 +76,16 @@ namespace ATM
                 
             }
         }
+        private void KeypadButtonClick(object? sender, EventArgs e)
+        {
+            Button keypadNumber = (Button)sender;
+            string number = keypadNumber.Text;
+
+            switch(number)
+            {
+                
+            } 
+        }
         private void GetCashButtonClick(object sender, EventArgs e)
         {
             //Hide the Get Cash button
@@ -145,7 +155,9 @@ namespace ATM
         private void HandleCustom()
         {
             keypadPanel.Visible = true;
-            currentAmount = 
+            currentAmount = "";
+
+            UpdateDisplay();
         }
     
 
