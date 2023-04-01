@@ -2,7 +2,102 @@ using System.Drawing;
 using System.Windows.Forms;
 
 namespace ATM
-{
+{   
+
+    public class GetCashForm : Form
+    {
+        private Label displayLabel;
+        private string currentAmount;
+        private string previousAmount;
+
+        public GetCashForm()
+        {
+            displayLabel = new Label();
+            displayLabel.Font = new Font("Arial", 24, FontStyle.Bold);
+            displayLabel.Width = 300;
+            displayLabel.Height = 70;
+            displayLabel.TextAlign = ContentAlignment.MiddleCenter;
+            this.Controls.Add(displayLabel);
+
+            //form size 
+            Width = 400;
+            Height = 300;
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Get Cash";
+            FormBorderStyle = FormBorderStyle.FixedDialog;
+
+
+            // button 20,50,100,cancel
+            string[] cashButton = {"20$", "50$", "100$", "Cancel"};
+            foreach ( string amount in cashButton )
+            {
+                Button moneyButton = new Button();
+                moneyButton.Text = amount;
+                moneyButton.Width = 70;
+                moneyButton.Height = 70;
+                moneyButton += MoneyButtonClick;
+                this.Controls.Add(moneyButton); 
+            }
+        }
+
+        private void MoneyButtonClick(object? sender, EventArgs e)
+        {
+            Button button = (Button)sender;
+            string buttonText = button.Text;
+
+            switch(buttonText)
+            {
+                case "20$":
+                    Handle20(buttonText);
+                    break;
+                case "50$":
+                    Handle50(buttonText);
+                    break;
+                case "100$":
+                    Handle100(buttonText);
+                     break;
+                case "Cancel":
+                    handleCancel(buttonText);
+                     break;
+                    
+            }
+
+            }
+        private void Handle20(string buttonText)
+        {
+            previousAmount = currentAmount;
+            currentAmount = buttonText;
+            TotalCash();
+
+            
+        }  
+
+        private void Handle50(string buttonText)
+        {
+            previousAmount = currentAmount;
+            currentAmount = buttonText;
+            TotalCash();
+        }
+
+        private void Handle100(string buttonText)
+        {
+            previousAmount = currentAmount;
+            currentAmount = buttonText;
+            TotalCash();
+        }
+
+        private void HandleCancel(string buttonText)
+        {
+
+        }
+
+        private void TotalCash()
+        {
+            
+        }
+    }
+
+
     public partial class Form1 : Form
     {
         private string currentNumber;
@@ -13,7 +108,7 @@ namespace ATM
         public Form1()
         {
             InitializeComponent();
-
+            this.Text = "ATM";
             //create a flow layout pannel
             flowLayoutPanel1 = new FlowLayoutPanel();
             flowLayoutPanel1.FlowDirection = FlowDirection.TopDown;
