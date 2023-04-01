@@ -93,7 +93,22 @@ namespace ATM
 
         private void TotalCash()
         {
-            
+            double result = 0.0;
+            result = double.Parse(previousAmount) + double.Parse(currentAmount);
+
+            currentAmount = result.ToString();
+            previousAmount = "\0";
+
+            UpdateTotal();
+
+        }
+
+        private void UpdateTotal()
+        {
+            if (displayLabel != null)
+            {
+                displayLabel.Text = currentAmount;
+            }
         }
     }
 
