@@ -8,7 +8,7 @@ namespace ATM
         private Label displayLabel;
         private string currentAmount ="0";
         private Button getcashButton;
-        private Panel keypadPannel;
+        private Panel keypadPanel;
         private TableLayoutPanel cashAmountPanel;
 
         public MainForm()
@@ -39,17 +39,82 @@ namespace ATM
             this.Controls.Add(displayLabel);
 
             //Create the keypad panel
-            keypadPannel = new Panel();
-            keypadPannel.Width = 250;
-            keypadPannel.Height = 200;
-            keypadPannel.Location = new Point(70, 150);
-            keypadPannel.Visible = false;
+            keypadPanel = new Panel();
+            keypadPanel.Width = 250;
+            keypadPanel.Height = 200;
+            keypadPanel.Location = new Point(70, 150);
+            keypadPanel.Visible = false;
             this.Controls.Add(keypadPannel);
 
             //Create the cash amount Pannel
+            cashAmountPanel = new TableLayoutPanel();
+            cashAmountPanel.Width = 250;
+            cashAmountPanel.Height = 200;
+            cashAmountPanel.Location = new Point(70, 150);
+            cashAmountPanel.Visible = false;
+            cashAmountPanel.ColumnCount = 2;
+            cashAmountPanel.RowCount = 4;
+            cashAmountPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50));
+            cashAmountPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50));
+            cashAmountPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 50));
+            cashAmountPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 50));
+            cashAmountPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 50));
+            cashAmountPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 50));
+            this.Controls.Add(cashAmountPanel);
 
-            
-             
+            //Create the keypad buttons
+
+            string[] keypadButtonLabels = { "1", "2", "3", "C", "4", "5", "6", "Cancel", "7", "8", "9", "OK", "", "0", ""};
+            for (int i = 0; i < keypadButtonLabels.Length; i++)
+            {
+                Button keypadButton = new Button();
+                keypadButton.Text = keypadButtonLabels[i];
+                keypadButton.Width = 50;
+                keypadButton.Height = 50;
+                keypadButton.Click += KeypadButtonClick;
+                keypadPanel.Controls.Add(keypadButton);
+            }
+        }
+        private void GetCashButtonClick(object sender, EventArgs e)
+        {
+            //Hide the Get Cash button
+            getcashButton.Visible = false;
+
+            //Show the cash amount panel
+            cashAmountPanel.Visible = true;
+
+            // add the cash amount buttons
+            string[] cashAmountButtonLabels = {"$20", "$50", "$100", "Custom" };
+            for (int i = 0; i < cashAmountButtonLabels.Length; i++);
+            {
+                Button cashAmountButton = new Button();
+                cashAmountButton.Text = cashAmountButtonLabels[i];
+                cashAmountButton.Width = 100;
+                cashAmountButton.Height = 100;
+                cashAmountButton.Click += CashAmountButtonClick;
+            }
+        }
+        private void CashAmountButtonClick(object? sender, EventArgs e)
+        {
+            Button amountButton = (Button) sender;
+            string buttonLabels = amountButton.Text;
+
+            switch(buttonLabels)
+            {
+                case"$20":
+                    Handle20();
+                    break;
+                case"$50":
+                    Handle50();
+                    break;
+                case"$100":
+                    Handle100();
+                    break;
+                case"Custom":
+                    HandleCustom();
+                    break;
+            }
         }
     }
+
 }
