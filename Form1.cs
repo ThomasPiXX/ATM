@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace ATM
 {
-    public class MainForm : Form
+    public partial class Form1: Form
     {
         private Label displayLabel;
         private string currentAmount = "\0";
@@ -11,8 +11,9 @@ namespace ATM
         private Panel keypadPanel;
         private TableLayoutPanel cashAmountPanel;
 
-        public MainForm()
+        public Form1()
         {
+            InitializeComponent();
             //Set up the form
 
             Width = 400;
@@ -44,7 +45,7 @@ namespace ATM
             keypadPanel.Height = 200;
             keypadPanel.Location = new Point(70, 150);
             keypadPanel.Visible = false;
-            this.Controls.Add(keypadPannel);
+            this.Controls.Add(keypadPanel);
 
             //Create the cash amount Pannel
             cashAmountPanel = new TableLayoutPanel();
@@ -72,7 +73,11 @@ namespace ATM
                 keypadButton.Width = 50;
                 keypadButton.Height = 50;
                 keypadButton.Click += KeypadButtonClick;
+
+                int row = i / 4;
+                int col = i % 4;
                 keypadPanel.Controls.Add(keypadButton);
+                keypadPanel.SetCellPosition(keypadButton, new TableLayoutPanelCellPosition(col, row));
                 
             }
         }
@@ -83,8 +88,51 @@ namespace ATM
 
             switch(number)
             {
-                
+                case"1":
+                case"2":
+                case"3":
+                case"4":
+                case"5":
+                case"6":
+                case"7":
+                case"8":
+                case"9":
+                    HandleKeypadDigit(number);
+                    break;
+                case"C":
+                    HandleKeypadClear(number);
+                    break;
+                case"Cancel":
+                    HandleKeypadCancel(number);
+                    break;
+
             } 
+        }
+        private void HandleKeypadDigit(string number)
+        {
+            currentAmount += number;
+            
+            UpdateDisplay();
+        }
+        private void HandleKeypadClear(string number)
+        {
+            currentAmount = "\0";
+
+            UpdateDisplay();
+        }
+        private void HandleKeypadCancel(string number)
+        {   
+            currentAmount = "\0";
+            keypadPanel.Visible = false;
+            getcashButton.Visible = true;
+
+            UpdateDisplay();
+
+        }
+        
+        private void UpdateDisplay()
+        {
+            displayLabel.Text = "$" + currentAmount;
         }
         private void GetCashButtonClick(object sender, EventArgs e)
         {
@@ -94,9 +142,11 @@ namespace ATM
             //Show the cash amount panel
             cashAmountPanel.Visible = true;
 
+            
+
             // add the cash amount buttons
             string[] cashAmountButtonLabels = {"$20", "$50", "$100", "Custom" };
-            for (int i = 0; i < cashAmountButtonLabels.Length; i++);
+            for (int i = 0; i < cashAmountButtonLabels.Length; i++)
             {
                 Button cashAmountButton = new Button();
                 cashAmountButton.Text = cashAmountButtonLabels[i];
