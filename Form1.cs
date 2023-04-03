@@ -4,12 +4,14 @@ using System.Windows.Forms;
 namespace ATM
 {
     public partial class Form1: Form
-    {
+    {   
         private Label displayLabel;
         private string currentAmount = "\0";
         private Button getcashButton;
-        private Panel keypadPanel;
+        private TableLayoutPanel keypadPanel;
         private TableLayoutPanel cashAmountPanel;
+        private string customAmount = "";
+        
 
         public Form1()
         {
@@ -40,18 +42,30 @@ namespace ATM
             this.Controls.Add(displayLabel);
 
             //Create the keypad panel
-            keypadPanel = new Panel();
+            keypadPanel = new TableLayoutPanel();
             keypadPanel.Width = 250;
             keypadPanel.Height = 200;
             keypadPanel.Location = new Point(70, 150);
             keypadPanel.Visible = false;
+            keypadPanel.RowCount = 4;
+            keypadPanel.ColumnCount = 4;
+            keypadPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25));
+            keypadPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25));
+            keypadPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25));
+            keypadPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25));
+            keypadPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 25));
+            keypadPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 25));
+            keypadPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 25));
+            keypadPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 25));
+            keypadPanel.Dock = DockStyle.Fill;
+
             this.Controls.Add(keypadPanel);
 
             //Create the cash amount Pannel
             cashAmountPanel = new TableLayoutPanel();
             cashAmountPanel.Width = 250;
             cashAmountPanel.Height = 200;
-            cashAmountPanel.Location = new Point(70, 150);
+            cashAmountPanel.Location = new Point(50, 125);
             cashAmountPanel.Visible = false;
             cashAmountPanel.ColumnCount = 2;
             cashAmountPanel.RowCount = 4;
@@ -66,25 +80,26 @@ namespace ATM
             //Create the keypad buttons
 
             string[] keypadButtonLabels = { "1", "2", "3", "C", "4", "5", "6", "Cancel", "7", "8", "9", "OK", "", "0", ""};
-            for (int i = 0; i < keypadButtonLabels.Length; i++)
-            {
-                Button keypadButton = new Button();
-                keypadButton.Text = keypadButtonLabels[i];
-                keypadButton.Width = 50;
-                keypadButton.Height = 50;
-                keypadButton.Click += KeypadButtonClick;
-
-                int row = i / 4;
-                int col = i % 4;
-                keypadPanel.Controls.Add(keypadButton);
-                keypadPanel.SetCellPosition(keypadButton, new TableLayoutPanelCellPosition(col, row));
-                
-            }
+            for (int row = 0; row < 4; row++)
+            {   
+                for (int col = 0; col < 3; col++ )
+                {   
+                    int index = row * 4 + col;    
+                    Button keypadButton = new Button();
+                    keypadButton.Text = keypadButtonLabels[index];
+                    keypadButton.Width = 50;
+                    keypadButton.Height = 50;
+                    keypadButton.Click += KeypadButtonClick;
+                    keypadPanel.Controls.Add(keypadButton, col, row);
+                    
+                }
+            }  
         }
-        private void KeypadButtonClick(object? sender, EventArgs e)
+        private void KeypadButtonClick(object sender, EventArgs e)
         {
             Button keypadNumber = (Button)sender;
             string number = keypadNumber.Text;
+        
 
             switch(number)
             {
@@ -142,8 +157,6 @@ namespace ATM
             //Show the cash amount panel
             cashAmountPanel.Visible = true;
 
-            
-
             // add the cash amount buttons
             string[] cashAmountButtonLabels = {"$20", "$50", "$100", "Custom" };
             for (int i = 0; i < cashAmountButtonLabels.Length; i++)
@@ -173,17 +186,25 @@ namespace ATM
                     Handle100();
                     break;
                 case"Custom":
+                    currentAmount = "\0";
                     HandleCustom();
                     break;
             }
         }
 
         private void Handle20()
-        {   
-            int amount = 20;
-            int result = int.Parse(currentAmount) + amount;
-            currentAmount = result.ToString();
-            UpdateDisplay();
+        {  
+            try
+            { 
+                int amount = 20;
+                int result = int.Parse(currentAmount) + amount;
+                currentAmount = result.ToString();
+                UpdateDisplay();
+            }
+            catch
+            {
+                MessageBox.Show($"An error occured ","Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void Handle50()
@@ -203,13 +224,17 @@ namespace ATM
         }
 
         private void HandleCustom()
-        {
+        {   
+            customAmount = currentAmount;
             keypadPanel.Visible = true;
-            currentAmount = "";
+            cashAmountPanel.Visible = false;
+
+            currentAmount = "\0";
+            
 
             UpdateDisplay();
         }
-    
+
 
     }
 
