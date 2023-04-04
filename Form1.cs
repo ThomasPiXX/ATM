@@ -6,7 +6,7 @@ namespace ATM
     public partial class Form1: Form
     {   
         private Label displayLabel;
-        private string currentAmount = "\0";
+        private string currentAmount = "";
         private Button getcashButton;
         private TableLayoutPanel keypadPanel;
         private TableLayoutPanel cashAmountPanel;
@@ -18,8 +18,8 @@ namespace ATM
             InitializeComponent();
             //Set up the form
 
-            Width = 400;
-            Height = 300;
+            Width = 500;
+            Height = 400;
             StartPosition = FormStartPosition.CenterScreen;
             Text = "ATM";
 
@@ -41,6 +41,8 @@ namespace ATM
             displayLabel.Location = new Point(50, 100);
             this.Controls.Add(displayLabel);
 
+
+            
             //Create the keypad panel
             keypadPanel = new TableLayoutPanel();
             keypadPanel.Width = 250;
@@ -65,7 +67,7 @@ namespace ATM
             cashAmountPanel = new TableLayoutPanel();
             cashAmountPanel.Width = 250;
             cashAmountPanel.Height = 200;
-            cashAmountPanel.Location = new Point(50, 125);
+            cashAmountPanel.Location = new Point(80, 170);
             cashAmountPanel.Visible = false;
             cashAmountPanel.ColumnCount = 2;
             cashAmountPanel.RowCount = 4;
@@ -77,12 +79,14 @@ namespace ATM
             cashAmountPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 50));
             this.Controls.Add(cashAmountPanel);
 
+           
+
             //Create the keypad buttons
 
             string[] keypadButtonLabels = { "1", "2", "3", "C", "4", "5", "6", "Cancel", "7", "8", "9", "OK", "", "0", ""};
             for (int row = 0; row < 4; row++)
             {   
-                for (int col = 0; col < 3; col++ )
+                for (int col = 0; col < 3 ; col++ )
                 {   
                     int index = row * 4 + col;    
                     Button keypadButton = new Button();
@@ -149,13 +153,32 @@ namespace ATM
         {
             displayLabel.Text = "$" + currentAmount;
         }
-        private void GetCashButtonClick(object sender, EventArgs e)
+        public void GetCashButtonClick(object sender, EventArgs e)
         {
             //Hide the Get Cash button
             getcashButton.Visible = false;
+            
 
             //Show the cash amount panel
             cashAmountPanel.Visible = true;
+
+            //add a display to the cashAmountPanel
+            Panel displayPanelCash = new Panel();
+            displayPanelCash.Width = 250;
+            displayPanelCash.Height = 100;
+            displayPanelCash.Location = new Point(90, 70);
+            displayPanelCash.BackColor = Color.White;
+            this.Controls.Add(displayPanelCash);
+
+            // add the display label to the display panel
+            Label displayLabelCash = new Label();
+            displayLabelCash.Font = new Font("Arial", 24, FontStyle.Bold);
+            displayLabelCash.Width = 250;
+            displayLabelCash.Height = 100;
+            displayLabelCash.Dock = DockStyle.Fill;
+            displayLabel.Anchor = AnchorStyles.None;
+            displayLabelCash.TextAlign = ContentAlignment.MiddleCenter;
+            this.Controls.Add(displayLabelCash);
 
             // add the cash amount buttons
             string[] cashAmountButtonLabels = {"$20", "$50", "$100", "Custom" };
@@ -168,6 +191,9 @@ namespace ATM
                 cashAmountButton.Click += CashAmountButtonClick;
                 cashAmountPanel.Controls.Add(cashAmountButton);
             }
+
+            displayLabelCash.Text = "$" + currentAmount;
+
         }
         private void CashAmountButtonClick(object? sender, EventArgs e)
         {
@@ -186,7 +212,7 @@ namespace ATM
                     Handle100();
                     break;
                 case"Custom":
-                    currentAmount = "\0";
+                    currentAmount = "";
                     HandleCustom();
                     break;
             }
@@ -194,21 +220,18 @@ namespace ATM
 
         private void Handle20()
         {  
-            try
-            { 
-                int amount = 20;
-                int result = int.Parse(currentAmount) + amount;
-                currentAmount = result.ToString();
-                UpdateDisplay();
-            }
-            catch
-            {
-                MessageBox.Show($"An error occured ","Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            currentAmount = currentAmount;
+            int amount = 0 ;
+            int result = int.Parse(currentAmount) + amount;
+            currentAmount = result.ToString();
+            UpdateDisplay();
+
+
         }
 
         private void Handle50()
-        {
+        {   
+            currentAmount =
             int amount = 50;
             int result = int.Parse(currentAmount) + amount;
             currentAmount = result.ToString();
@@ -217,6 +240,7 @@ namespace ATM
 
         private void Handle100()
         {
+            currentAmount = "";
             int amount = 100;
             int result = int.Parse(currentAmount) + amount;
             currentAmount = result.ToString();
@@ -229,12 +253,12 @@ namespace ATM
             keypadPanel.Visible = true;
             cashAmountPanel.Visible = false;
 
-            currentAmount = "\0";
+            currentAmount = "";
             
 
             UpdateDisplay();
         }
-
+        
 
     }
 
