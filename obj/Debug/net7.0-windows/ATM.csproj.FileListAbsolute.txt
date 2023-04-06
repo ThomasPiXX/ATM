@@ -13,3 +13,10 @@ C:\Users\tommy\OneDrive\Bureau\#\ATM\obj\Debug\net7.0-windows\refint\ATM.dll
 C:\Users\tommy\OneDrive\Bureau\#\ATM\obj\Debug\net7.0-windows\ATM.pdb
 C:\Users\tommy\OneDrive\Bureau\#\ATM\obj\Debug\net7.0-windows\ATM.genruntimeconfig.cache
 C:\Users\tommy\OneDrive\Bureau\#\ATM\obj\Debug\net7.0-windows\ref\ATM.dll
+C:\Users\tommy\OneDrive\Bureau\#\ATM\bin\Debug\net7.0-windows\System.Data.SqlClient.dll
+C:\Users\tommy\OneDrive\Bureau\#\ATM\bin\Debug\net7.0-windows\runtimes\win-arm64\native\sni.dll
+C:\Users\tommy\OneDrive\Bureau\#\ATM\bin\Debug\net7.0-windows\runtimes\win-x64\native\sni.dll
+C:\Users\tommy\OneDrive\Bureau\#\ATM\bin\Debug\net7.0-windows\runtimes\win-x86\native\sni.dll
+C:\Users\tommy\OneDrive\Bureau\#\ATM\bin\Debug\net7.0-windows\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\tommy\OneDrive\Bureau\#\ATM\bin\Debug\net7.0-windows\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\tommy\OneDrive\Bureau\#\ATM\obj\Debug\net7.0-windows\ATM.csproj.CopyComplete

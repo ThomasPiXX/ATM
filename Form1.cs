@@ -1,8 +1,60 @@
 using System.Drawing;
 using System.Windows.Forms;
+using System.Data.SqlClient;
+
+
+// Create a New SqlConnection Object
+SqlConnection db = new SqlConnection(@"Data Source=.\Users.db;Version=3;");
+//Open the connection 
+db.Open();
 
 namespace ATM
 {
+    public class AuthenticationForm : Form
+    {
+        private TextBox nipTextBox;
+        private Button loginButton;
+        private bool isAuthenticated = false;
+
+        public AuthenticationForm()
+        {
+            InitializeComponent();
+            
+            //Set up the Form
+
+            Width = 400;
+            Height= 300;
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Authenticator";
+
+            // Create the Nip label and textbox
+            Label nipLable = new Label();
+            nipLable.Text = "Enter your NIP:";
+            nipLable.Width = 100;
+            nipLable,Height = 25;
+            nipLable.Location = new Point(20,20);
+            this.Controls.Add(nipLabel);
+
+            nipTextBox = new TextBox();
+            nipTextBox.Width = 200;
+            nipTextBox.Height = 25;
+            nipTextBox.PasswordChar = '*';
+            nipTextBox.Location = new Point(120, 20);
+            this.Controls.Add(nipTextBox);
+
+            Button authenticateButton = new Button();
+            authenticateButton.Text = "Authenticate";
+            authenticateButton.Width = 100;
+            authenticateButton.Height = 25;
+            authenticateButton.Click += AuthenticateButtonClick;
+            this.Controls.Add(authenticateButton);
+
+        }
+        private void AuthenticateButtonClick(object sender, EventArgs e)
+        {
+            
+        }
+    }
     public partial class Form1: Form
     {   
         private Label displayLabel;
@@ -26,6 +78,7 @@ namespace ATM
             //Create the Get Cash button
             getcashButton = new Button();
             getcashButton.Text = "Get Cash";
+            getcashButton.Visible = false;
             getcashButton.Width = 100;
             getcashButton.Height = 50;
             getcashButton.Location = new Point(20, 20);
