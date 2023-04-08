@@ -28,11 +28,11 @@ namespace ATM
             Text = "Authenticator";
 
             // Create the Nip label and textbox
-            Label nipLable = new Label();
-            nipLable.Text = "Enter your NIP:";
-            nipLable.Width = 100;
-            nipLable,Height = 25;
-            nipLable.Location = new Point(20,20);
+            Label nipLabel = new Label();
+            nipLabel.Text = "Enter your NIP:";
+            nipLabel.Width = 100;
+            nipLabel.Height = 25;
+            nipLabel.Location = new Point(20,20);
             this.Controls.Add(nipLabel);
 
             nipTextBox = new TextBox();
@@ -52,7 +52,43 @@ namespace ATM
         }
         private void AuthenticateButtonClick(object sender, EventArgs e)
         {
-            
+            string nip = nipTextBox.Text;
+            // Create a New SqlConnection Object
+            SqlConnection db = new SqlConnection(@"Data Source=.\Users.db;Version=3;");
+            //Open the connection 
+            db.Open();
+            // Create a new SqlCommand object to retrieve Users Nip
+            SqlCommand command = new SqlCommand($"SELECT * FROM Users WHERE user_id = (SELECT user_id FROM Users WHERE NIP = '{nip}')", db);
+
+            //execute the command and retrieve the result 
+
+            //close the database connection
+            db.Close();
+
+            //Check if the Nip was found in the database
+            if (count > 0)
+            {
+                //NIP is valid, show the Get Cash Button
+                MessageBox.Show("Authentication successful.");
+                Form1 atmForm = new Form1();
+                atmForm.Visible = true;
+                this.Visible = false;
+
+            }
+            else
+            {
+                //NIP is invalid , show an error messag
+                MessageBox.Show("Invalid NIP");
+
+            }
+        }
+        private void InitializeComponent()
+        {
+            // Auto-generated code that initializes the form's components
+            this.SuspendLayout();
+            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.Name = "AuthenticatorForm";
+            this.ResumeLayout(false);            
         }
     }
     public partial class Form1: Form
