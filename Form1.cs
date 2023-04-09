@@ -60,19 +60,30 @@ namespace ATM
             // Create a new SqlCommand object to retrieve Users Nip
             SqlCommand command = new SqlCommand($"SELECT * FROM Users WHERE user_id = (SELECT user_id FROM Users WHERE NIP = '{nip}')", db);
 
-            //execute the command and retrieve the result 
-
-            //close the database connection
-            db.Close();
-
-            //Check if the Nip was found in the database
-            if (count > 0)
+            //making Data accessible
+            SqlDataReader reader = command.ExecuteReader(); 
+            //Check if there is associated data with the nip
+            if (reader.HasRows)
             {
-                //NIP is valid, show the Get Cash Button
-                MessageBox.Show("Authentication successful.");
-                Form1 atmForm = new Form1();
+                //read the reader
+                reader.Read();
+                
+                //access the data from the row using column names
+                string userId = reader.GetString(reader.GetOrdinal("user_id"));
+                string pin = reader.GetString(reader.GetOrdinal("user_nip"));
+                decimal worth = reader.GetDecimal(reader.GetOrdinal("user_worth"));
+
+                //close reader and the database connection
+                reader.Close();
+                db.Close();
+
+                //authentication successful, show the main form;
+                MessageBox.Show("Authentication Successfull");
+                Form1 atmForm = new Form1(userId, pin, worth);
                 atmForm.Visible = true;
-                this.Visible = false;
+                this.Visible = false;                                                        
+
+                
 
             }
             else
@@ -93,6 +104,9 @@ namespace ATM
     }
     public partial class Form1: Form
     {   
+        private string _userId;
+        private string _pin;
+        private decimal _worth;
         private Label displayLabel;
         private string currentAmount = "0";
         private Button getcashButton;
@@ -101,8 +115,13 @@ namespace ATM
         private string customAmount = "";
         
 
-        public Form1()
+        public Form1(string userId, string pin, decimal worth)
         {
+            
+            _userId = userId;
+            _pin = pin;
+            _worth = worth;
+
             InitializeComponent();
 
             //Set up the form
