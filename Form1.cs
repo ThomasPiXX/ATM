@@ -14,7 +14,10 @@ namespace ATM
     {
         private TextBox nipTextBox;
         private Button loginButton;
-        private bool isAuthenticated = false;
+        public bool IsAuthenticated = false;
+        public string userId {get; private set; }
+        public string pin { get; private set; }
+        public decimal worth { get; private set; }
 
         public AuthenticationForm()
         {
@@ -81,7 +84,8 @@ namespace ATM
                 MessageBox.Show("Authentication Successfull");
                 Form1 atmForm = new Form1(userId, pin, worth);
                 atmForm.Visible = true;
-                this.Visible = false;                                                        
+                this.Visible = false;
+                IsAuthenticated = true;                                                        
 
                 
 
@@ -90,6 +94,7 @@ namespace ATM
             {
                 //NIP is invalid , show an error messag
                 MessageBox.Show("Invalid NIP");
+                IsAuthenticated = false;
 
             }
         }
