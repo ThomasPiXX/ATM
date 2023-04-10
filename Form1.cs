@@ -3,11 +3,6 @@ using System.Windows.Forms;
 using System.Data.SqlClient;
 
 
-// Create a New SqlConnection Object
-SqlConnection db = new SqlConnection(@"Data Source=.\Users.db;Version=3;");
-//Open the connection 
-db.Open();
-
 namespace ATM
 {
     public class AuthenticationForm : Form
@@ -57,7 +52,7 @@ namespace ATM
         {
             string nip = nipTextBox.Text;
             // Create a New SqlConnection Object
-            SqlConnection db = new SqlConnection(@"Data Source=.\Users.db;Version=3;");
+            SqlConnection db = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename.mdf=C:\Users\tommy\OneDrive\Bureau\#\ATM;Integrated Security=True;Connect Timeout=30");
             //Open the connection 
             db.Open();
             // Create a new SqlCommand object to retrieve Users Nip
@@ -80,7 +75,7 @@ namespace ATM
                 reader.Close();
                 db.Close();
 
-                //authentication successful, show the main form;
+                //authentication successful, show the main form
                 MessageBox.Show("Authentication Successfull");
                 Form1 atmForm = new Form1(userId, pin, worth);
                 atmForm.Visible = true;
