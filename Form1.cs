@@ -1,6 +1,6 @@
 using System.Drawing;
 using System.Windows.Forms;
-using System.Data.SqlClient;
+using Microsoft.Data.Sqlite;
 
 
 namespace ATM
@@ -52,14 +52,14 @@ namespace ATM
         {
             string nip = nipTextBox.Text;
             // Create a New SqlConnection Object
-            SqlConnection db = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename.mdf=C:\Users\tommy\OneDrive\Bureau\#\ATM;Integrated Security=True;Connect Timeout=30");
+            SqliteConnection db = new SqliteConnection(@"Data Source=Users.db;Mode=ReadWrite;");
             //Open the connection 
             db.Open();
             // Create a new SqlCommand object to retrieve Users Nip
-            SqlCommand command = new SqlCommand($"SELECT * FROM Users WHERE user_id = (SELECT user_id FROM Users WHERE NIP = '{nip}')", db);
+            SqliteCommand command = new SqliteCommand($"SELECT * FROM Users WHERE user_id = (SELECT user_id FROM Users WHERE user_nip = '{nip}')", db);
 
             //making Data accessible
-            SqlDataReader reader = command.ExecuteReader(); 
+            SqliteDataReader reader = command.ExecuteReader(); 
             //Check if there is associated data with the nip
             if (reader.HasRows)
             {
@@ -229,6 +229,9 @@ namespace ATM
                 case"Cancel":
                     HandleKeypadCancel(number);
                     break;
+                case"OK":
+                    HandleKeypadOk(number);
+                    break;
 
             } 
         }
@@ -347,6 +350,21 @@ namespace ATM
             
 
             UpdateDisplay();
+        }
+
+        public void HandleKeypadOk(string number)
+        {
+            //get the user worth 
+            decimal user_worth = _worth;
+            //casting currentAmount 
+            decimal cash = decimal.Parse(currentAmount);
+            //math
+            decimal new_worth = _worth - cash;
+
+            
+
+            
+
         }
         
 
