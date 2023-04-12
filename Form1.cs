@@ -12,6 +12,8 @@ namespace ATM
         private TextBox nipTextBox;
         private Button loginButton;
         public bool IsAuthenticated = false;
+
+
         public string userId {get; private set; }
         public string pin { get; private set; }
         public decimal worth { get; private set; }
@@ -77,7 +79,7 @@ namespace ATM
 
                 //authentication successful, show the main form
                 MessageBox.Show("Authentication Successfull");
-                Form1 atmForm = new Form1(userId, pin, worth);
+                Form1 atmForm = new Form1(this, userId, pin, worth);
                 atmForm.Visible = true;
                 this.Visible = false;
                 IsAuthenticated = true;                                                        
@@ -104,6 +106,7 @@ namespace ATM
     }
     public partial class Form1: Form
     {   
+        private AuthenticationForm _authForm;
         private string _userId;
         private string _pin;
         private decimal _worth;
@@ -115,9 +118,9 @@ namespace ATM
         private string customAmount = "";
         
 
-        public Form1(string userId, string pin, decimal worth)
+        public Form1(AuthenticationForm authenticationForm, string userId, string pin, decimal worth)
         {
-            
+            _authForm = authenticationForm;
             _userId = userId;
             _pin = pin;
             _worth = worth;
@@ -353,16 +356,32 @@ namespace ATM
         }
 
         public void HandleKeypadOk(string number)
-        {
+        {   
+            string userId = _userId;
             //get the user worth 
             decimal user_worth = _worth;
             //casting currentAmount 
             decimal cash = decimal.Parse(currentAmount);
             //math
-            decimal new_worth = _worth - cash;
+            if (user_worth  > cash)
+            {
+                decimal new_worth = _worth - cash;
+            
+                //open the sql connection
+                _authForm.db.Open();
 
-            //open the sql connection 
-            SqliteCommand db = new SqliteCommand();
+                SqliteCommand updateCommand = new SqliteCommand($"UPDATE Users SET user_worth = {new_worth} WHERE user_id = '{userId}'");
+                updateCommand.ExecuteNonQuery();
+
+                MessageBox.Show("transaction approve");
+            }
+            else
+            {
+                MessageBox.Show("transaction denied not enough Found");
+
+                keypadPanel.Visible = false;
+                cashAmountPanel.Visible = true;
+            }
         }
         
 

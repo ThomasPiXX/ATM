@@ -22,7 +22,7 @@ static class Program
             string pin = authenticationForm.pin;
             decimal worth = authenticationForm.worth;
 
-            Application.Run(new Form1(userId, pin, worth));
+            Application.Run(new Form1(authenticationForm, userId, pin, worth));
         }
         else
         {
