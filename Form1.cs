@@ -4,9 +4,11 @@ using Microsoft.Data.Sqlite;
 
 
 namespace ATM
-{
+{   
+    
     public class AuthenticationForm : Form
-    {
+    {   
+        public readonly SqliteConnection db = new SqliteConnection(@"Data Source=Users.db;Mode=ReadWrite;");
         private TextBox nipTextBox;
         private Button loginButton;
         public bool IsAuthenticated = false;
@@ -51,8 +53,6 @@ namespace ATM
         private void AuthenticateButtonClick(object sender, EventArgs e)
         {
             string nip = nipTextBox.Text;
-            // Create a New SqlConnection Object
-            SqliteConnection db = new SqliteConnection(@"Data Source=Users.db;Mode=ReadWrite;");
             //Open the connection 
             db.Open();
             // Create a new SqlCommand object to retrieve Users Nip
@@ -361,10 +361,8 @@ namespace ATM
             //math
             decimal new_worth = _worth - cash;
 
-            
-
-            
-
+            //open the sql connection 
+            SqliteCommand db = new SqliteCommand();
         }
         
 
