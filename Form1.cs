@@ -30,19 +30,27 @@ namespace ATM
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Authenticator";
 
+            //brand label
+            Label titleLabel = new Label();
+            titleLabel.Text = "Institution Name";
+            titleLabel.Width = 120;
+            titleLabel.Height = 40;
+            titleLabel.Location = new Point(20,20);
+            this.Controls.Add(titleLabel);
+
             // Create the Nip label and textbox
             Label nipLabel = new Label();
             nipLabel.Text = "Enter your NIP:";
             nipLabel.Width = 100;
             nipLabel.Height = 25;
-            nipLabel.Location = new Point(20,20);
+            nipLabel.Location = new Point(120,20);
             this.Controls.Add(nipLabel);
 
             nipTextBox = new TextBox();
             nipTextBox.Width = 200;
             nipTextBox.Height = 25;
             nipTextBox.PasswordChar = '*';
-            nipTextBox.Location = new Point(120, 20);
+            nipTextBox.Location = new Point(150, 20);
             this.Controls.Add(nipTextBox);
 
             // Creating  a label for the card authenticator
@@ -57,7 +65,7 @@ namespace ATM
             cardTextBox = new TextBox ();
             cardTextBox.Width = 200;
             cardTextBox.Height = 25;
-            cardTextBox.Location = new Point (150,50);
+            cardTextBox.Location = new Point (170,50);
             this.Controls.Add(cardTextBox);
             
 
@@ -67,6 +75,7 @@ namespace ATM
             authenticateButton.Text = "Authenticate";
             authenticateButton.Width = 100;
             authenticateButton.Height = 25;
+            authenticateButton.Location = new Point(100, 100);
             authenticateButton.Click += AuthenticateButtonClick;
             this.Controls.Add(authenticateButton);
 
