@@ -73,7 +73,8 @@ namespace ATM
 
         }
         private void AuthenticateButtonClick(object sender, EventArgs e)
-        {
+        {   
+            string cardNo = cardTextBox.Text;
             string nip = nipTextBox.Text;
             //Open the connection 
             db.Open();
@@ -92,19 +93,31 @@ namespace ATM
                 string userId = reader.GetString(reader.GetOrdinal("user_id"));
                 string pin = reader.GetString(reader.GetOrdinal("user_nip"));
                 decimal worth = reader.GetDecimal(reader.GetOrdinal("user_worth"));
+                string cardNumber = reader.GetString(reader.GetOrdinal("card_number"));
 
                 //close reader and the database connection
                 reader.Close();
                 db.Close();
 
-                //authentication successful, show the main form
-                MessageBox.Show("Authentication Successfull");
-                Form1 atmForm = new Form1(this, userId, pin, worth);
-                atmForm.Visible = true;
-                this.Visible = false;
-                IsAuthenticated = true;                                                        
+                if (cardNo == cardNumber)
+                {
+                 
+            
+                    //authentication successful, show the main form
+                    MessageBox.Show("Authentication Successfull");
+                    Form1 atmForm = new Form1(this, userId, pin, worth);
+                    atmForm.Visible = true;
+                    this.Visible = false;
+                    IsAuthenticated = true;
+                }
 
-                
+                else
+                {
+                    //card number is invalid 
+                    MessageBox.Show("invalid card number");
+                    IsAuthenticated = false;
+                    
+                }
 
             }
             else
