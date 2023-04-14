@@ -8,6 +8,7 @@ namespace ATM
     
     public class AuthenticationForm : Form
     {   
+        private TextBox cardTextBox;
         public readonly SqliteConnection db = new SqliteConnection(@"Data Source=Users.db;Mode=ReadWrite;");
         private TextBox nipTextBox;
         private Button loginButton;
@@ -44,12 +45,31 @@ namespace ATM
             nipTextBox.Location = new Point(120, 20);
             this.Controls.Add(nipTextBox);
 
+            // Creating  a label for the card authenticator
+            
+            Label cardLabel = new Label();
+            cardLabel.Text = "Enter the card No";
+            cardLabel.Width = 100;
+            cardLabel.Height = 25;
+            cardLabel.Location = new Point(50,50);
+            this.Controls.Add(cardLabel);
+
+            cardTextBox = new TextBox ();
+            cardTextBox.Width = 200;
+            cardTextBox.Height = 25;
+            cardTextBox.Location = new Point (150,50);
+            this.Controls.Add(cardTextBox);
+            
+
+
+
             Button authenticateButton = new Button();
             authenticateButton.Text = "Authenticate";
             authenticateButton.Width = 100;
             authenticateButton.Height = 25;
             authenticateButton.Click += AuthenticateButtonClick;
             this.Controls.Add(authenticateButton);
+
 
         }
         private void AuthenticateButtonClick(object sender, EventArgs e)
