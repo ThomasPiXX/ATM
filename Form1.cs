@@ -35,7 +35,7 @@ namespace ATM
             titleLabel.Text = "Institution Name";
             titleLabel.Width = 120;
             titleLabel.Height = 40;
-            titleLabel.Location = new Point(20,20);
+            titleLabel.Location = new Point(200,20);
             this.Controls.Add(titleLabel);
 
             // Create the Nip label and textbox
@@ -43,29 +43,29 @@ namespace ATM
             nipLabel.Text = "Enter your NIP:";
             nipLabel.Width = 100;
             nipLabel.Height = 25;
-            nipLabel.Location = new Point(120,20);
+            nipLabel.Location = new Point(100,80);
             this.Controls.Add(nipLabel);
 
             nipTextBox = new TextBox();
             nipTextBox.Width = 200;
             nipTextBox.Height = 25;
             nipTextBox.PasswordChar = '*';
-            nipTextBox.Location = new Point(150, 20);
+            nipTextBox.Location = new Point(150, 80);
             this.Controls.Add(nipTextBox);
 
             // Creating  a label for the card authenticator
             
             Label cardLabel = new Label();
-            cardLabel.Text = "Enter the card No";
+            cardLabel.Text = "card No:";
             cardLabel.Width = 100;
             cardLabel.Height = 25;
-            cardLabel.Location = new Point(50,50);
+            cardLabel.Location = new Point(100,110);
             this.Controls.Add(cardLabel);
 
             cardTextBox = new TextBox ();
             cardTextBox.Width = 200;
             cardTextBox.Height = 25;
-            cardTextBox.Location = new Point (170,50);
+            cardTextBox.Location = new Point (150,110);
             this.Controls.Add(cardTextBox);
             
 
@@ -75,7 +75,7 @@ namespace ATM
             authenticateButton.Text = "Authenticate";
             authenticateButton.Width = 100;
             authenticateButton.Height = 25;
-            authenticateButton.Location = new Point(100, 100);
+            authenticateButton.Location = new Point(100, 150);
             authenticateButton.Click += AuthenticateButtonClick;
             this.Controls.Add(authenticateButton);
 
